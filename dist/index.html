@@ -4,9 +4,66 @@
     <meta charset="UTF-8">
     <title>Weather App</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <script src="main.js" defer></script>
   </head>
   <body>
     <!--===== C O N T E N T =====-->
+    <div class="mainContent">
+
+      <img src="./images/medellin5.webp" alt="" id="background">
+
+      <div class="searchContent">
+        <div class="search">
+          <input type="text" name="" id="inputSearch">
+          <img src="./images/glass.svg" alt="" id="imgSearch">
+          <img src="./images/xmark.svg" alt="" id="imgClose">
+        </div>
+
+        <div class="trendsContent">
+          <button class="trends" id="city1">Medellín, Colombia</button>
+          <button class="trends" id="city2">Nueva York, EE. UU.</button>
+          <button class="trends" id="city3">París, Francia</button>
+          <button class="trends" id="city4">Tokio, Japón</button>
+          <button class="trends" id="city5">Sydney, Australia</button>
+        </div>
+      </div>
+
+      <div class="dataContent">
+        <p id="cityName">City</p>
+
+        <div class="data1">
+          <p id="temp">temp</p>
+          <div>
+            <p>Max</p>
+            <p id="tempMax">°C</p>
+          </div>
+          <div>
+            <p>Min</p>
+            <p id="tempMin">°C</p>
+          </div>
+        </div>
+
+        <p id="weather">weather</p>
+
+        <div class="data2">
+          <div>
+            <p>Feels Like</p>
+            <p id="feelsLike">°C</p>
+          </div>
+          <div>
+            <p>Humidity</p>
+            <p id="humidity">°C</p>
+          </div>
+          <div>
+            <p>Wind</p>
+            <p id="wind">°C</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </body>
 </html>
