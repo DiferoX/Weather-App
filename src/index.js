@@ -1,4 +1,6 @@
 let sw = 1;
+let tempChange = "C";
+let timeImg = 100000;
 
 function fetchWeather (city)
 {
@@ -43,29 +45,88 @@ function displayCity (data)
   let cityName = document.getElementById ('cityName');
   cityName.textContent = `${data.name}, ${data.sys.country}`;
 
-  let temp = document.getElementById ('temp');
-  temp.textContent = `${data.main.temp} °C`;
-
-  let tempMax = document.getElementById ('tempMax');
-  tempMax.textContent = `${data.main.temp_max} °C`;
-
-  let tempMin = document.getElementById ('tempMin');
-  tempMin.textContent = `${data.main.temp_min} °C`;
-
   let weather = document.getElementById ('weather');
   weather.textContent = `${data.weather[0].main}`;
-
-  let feelsLike = document.getElementById ('feelsLike');
-  feelsLike.textContent = `${data.main.feels_like} °C`;
 
   let humidity = document.getElementById ('humidity');
   humidity.textContent = `${data.main.humidity} %`;
 
   let wind = document.getElementById ('wind');
   wind.textContent = `${data.wind.speed} Km/h`;
+
+  if (tempChange === "F")
+  {
+    let temp = document.getElementById ('temp');
+    temp.textContent = `${fahrenheit(data.main.temp)} °F`;
+
+    let tempMax = document.getElementById ('tempMax');
+    tempMax.textContent = `${fahrenheit(data.main.temp_max)} °F`;
+
+    let tempMin = document.getElementById ('tempMin');
+    tempMin.textContent = `${fahrenheit(data.main.temp_min)} °F`;
+
+    let feelsLike = document.getElementById ('feelsLike');
+    feelsLike.textContent = `${fahrenheit(data.main.feels_like)} °F`;
+  }
+  else
+  {
+    let temp = document.getElementById ('temp');
+    temp.textContent = `${data.main.temp} °C`;
+
+    let tempMax = document.getElementById ('tempMax');
+    tempMax.textContent = `${data.main.temp_max} °C`;
+
+    let tempMin = document.getElementById ('tempMin');
+    tempMin.textContent = `${data.main.temp_min} °C`;
+
+    let feelsLike = document.getElementById ('feelsLike');
+    feelsLike.textContent = `${data.main.feels_like} °C`;
+  }
+}
+
+function fahrenheit(C)
+{
+  let n = ((C * (9/5)) + 32);
+  let num = n.toFixed(2);
+  return num;
 }
 
 fetchWeather ("Medellin");
+autoLoad();
+
+
+//window.addEventListener ('load', function()
+//{
+function autoLoad ()
+{
+  let background = document.getElementById ('background');
+  let autoDisplay = [];
+  let ind = 0;
+
+  autoDisplay[0] = {city: "Medellin", img: "./images/medellin5.webp", sw: 1};
+  autoDisplay[1] = {city: "new york", img: "./images/new-york.jpg", sw: 1};
+  autoDisplay[2] = {city: "paris", img: "./images/paris.jpg", sw: 1};
+  autoDisplay[3] = {city: "tokio", img: "./images/tokio.jpg", sw: 1};
+  autoDisplay[4] = {city: "sydney", img: "./images/sydney.jpg", sw: 1};
+
+  function changeImg ()
+  {
+    sw = autoDisplay[ind].sw;
+    background.src = autoDisplay[ind].img;
+    fetchWeather (autoDisplay[ind].city);    
+
+    if (ind < 4)
+    {
+      ind++;
+    }
+    else
+    {
+      ind = 0;
+    }
+  }
+  setInterval (changeImg, timeImg);
+}
+//});
 
 
 let inputSearch = document.getElementById ('inputSearch');
@@ -133,6 +194,23 @@ city5.addEventListener ('click', function()
   let background = document.getElementById ('background');
   background.src = "./images/sydney.jpg";
   fetchWeather ("sydney");
+});
+
+let temp = document.getElementById ('temp');
+temp.addEventListener ('click', function()
+{
+  if (tempChange === "C")
+  {
+    tempChange = "F";
+  }
+  else
+  {
+    tempChange = "C";
+  }
+  
+  let cityName = document.getElementById ('cityName');
+  fetchWeather (cityName.textContent);
+  
 });
 
 /*
